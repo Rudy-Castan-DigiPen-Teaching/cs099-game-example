@@ -46,6 +46,6 @@ function playStartGameSfx() {
 }
 
 function playExplosionSfx() {
-	let index = int(random(0, explosionSfxs.length));
-	explosionSfxs[index].play();
+	let explode_sfx = random(explosionSfxs);
+	explode_sfx.play();
 }
