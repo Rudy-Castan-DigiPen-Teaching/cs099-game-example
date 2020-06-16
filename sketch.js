@@ -29,7 +29,9 @@ let isPause = true;
 let bombsPerFrame = 0.005;
 let bombsToSpawn = 3;
 let scoreEffect = 1;
-let screenShakeTime = 0;
+let trauma = 0;
+const MaxShakeAngle = 3.14 / 8;
+const MaxShakeOffset = 50;
 
 let timestamp;
 
@@ -61,6 +63,18 @@ function draw() {
     return;
   }
 
+  trauma = constrain(trauma, 0, 1);
+  if(trauma > 0){
+    const shake = trauma * trauma;
+    const offset_x = MaxShakeOffset * shake * random(-1,1);
+    const offset_y = MaxShakeOffset * shake * random(-1,1);
+    const angle = MaxShakeAngle * shake * random(-1,1);
+    trauma -= delta_time;
+    translate(width/2, height/2);
+    translate(offset_x, offset_y);
+    rotate(angle);
+    translate(-width/2, -height/2);
+  }
   player.Update(delta_time);
 
   bombsToSpawn += bombsPerFrame;
@@ -79,19 +93,14 @@ function draw() {
         lives--;
         playLoseLifeSfx();
         player.OnBombCollide(b);
-        screenShakeTime = bombs.length / 3;
+        trauma += 0.6;
       }
     }
 
-    if (screenShakeTime > 0) {
-      applyMatrix(1, 0, 0, 1, random(-0.2, 0.2), random(-0.2, 0.2));
-      b.Draw();
-      screenShakeTime -= delta_time;
-    } else
-      b.Draw();
+    b.Draw();
   }
 
-  if (lives <= 0 && screenShakeTime <= 0)
+  if (lives <= 0 && trauma <= 0)
     isPause = true;
 
   player.Draw();
