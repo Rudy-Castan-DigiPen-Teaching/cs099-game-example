@@ -3,5 +3,8 @@ html, body {
   padding: 0;
 }
 canvas {
-  display: block;
+    padding: 0;
+    margin: auto;
+    display: block;
+    width: 800px;
 }
