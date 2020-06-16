@@ -71,6 +71,15 @@ class Player {
 			this.isInvulnrable = this.coolDownToNormal > 0;
 		}
 
+		if(this.pos.x < 0)
+			this.pos.x = 0;
+		else if(this.pos.x > width)
+			this.pos.x = width;
+		if(this.pos.y < 0)
+			this.pos.y = 0;
+		else if(this.pos.y > height)
+			this.pos.y = height;
+
 		let direction = createVector(this.pos.x - mouseX, this.pos.y - mouseY).mult(0.05);
 		//let direction = createVector(this.pos.x - mouseX, this.pos.y - mouseY).normalize().mult(2);
 		this.eyesPos.set(this.pos.x, this.pos.y - 3);
