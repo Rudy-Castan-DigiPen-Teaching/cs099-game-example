@@ -20,9 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// This can improve performance according to
-// https://github.com/processing/p5.js/wiki/Optimizing-p5.js-Code-for-Performance
-p5.disableFriendlyErrors = true;
 
 let player;
 let bombs = [];
